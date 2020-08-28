@@ -1,3 +1,5 @@
+using AutoMapper;
+using ContosoUniversity.Infrastructure;
 using FluentValidation.AspNetCore;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
@@ -25,6 +27,11 @@ namespace ContosoUniversity
             services.AddMediatR(typeof(Startup));
             services.AddControllers()
                 .AddFluentValidation(cfg => cfg.RegisterValidatorsFromAssemblyContaining<Startup>());
+
+            services.AddScoped<IDbFactory, DbFactory>();
+            services.AddScoped<IConnectionFactory, ConnectionFactory>();
+
+            services.AddAutoMapper(typeof(Startup));
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

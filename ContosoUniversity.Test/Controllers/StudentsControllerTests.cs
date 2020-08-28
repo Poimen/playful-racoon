@@ -2,6 +2,8 @@ using System;
 using System.Threading.Tasks;
 using ContosoUniversity.Controllers;
 using ContosoUniversity.Models.Students;
+using ContosoUniversity.Test.helpers;
+using MediatR;
 using NUnit.Framework;
 
 namespace ContosoUniversity.Test.Controllers
@@ -28,7 +30,8 @@ namespace ContosoUniversity.Test.Controllers
 
         private static StudentsController CreateController()
         {
-            return new StudentsController();
+            var mediatr = IntegrationServiceSetup.GetService<IMediator>();
+            return new StudentsController(mediatr);
         }
     }
 }

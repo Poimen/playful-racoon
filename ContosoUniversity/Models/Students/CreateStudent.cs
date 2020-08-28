@@ -1,11 +1,12 @@
 using System;
 using FluentValidation;
+using MediatR;
 
 namespace ContosoUniversity.Models.Students
 {
     public class CreateStudent
     {
-        public class Request
+        public class Request : IRequest<int>
         {
             public string LastName { get; set; }
 

@@ -1,4 +1,5 @@
 using FluentValidation.AspNetCore;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -21,6 +22,7 @@ namespace ContosoUniversity
             services.AddHealthChecks();
             services.AddOpenApiDocument();
             services.AddLogging();
+            services.AddMediatR(typeof(Startup));
             services.AddControllers()
                 .AddFluentValidation(cfg => cfg.RegisterValidatorsFromAssemblyContaining<Startup>());
         }

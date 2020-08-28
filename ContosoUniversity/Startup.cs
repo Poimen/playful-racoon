@@ -18,6 +18,8 @@ namespace ContosoUniversity
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddHealthChecks();
+            services.AddOpenApiDocument();
+            services.AddLogging();
             services.AddControllers();
         }
 
@@ -31,13 +33,19 @@ namespace ContosoUniversity
             app.UseHttpsRedirection();
 
             app.UseRouting();
+            app.UseCors();
 
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHealthChecks("/health");
             });
+
+            app.UseOpenApi();
+            app.UseSwaggerUi3();
+            app.UseReDoc(config => config.Path = "/doc");
         }
     }
 }

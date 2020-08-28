@@ -13,7 +13,7 @@ namespace ContosoUniversity.Test.Controllers
         public async Task GivenStudentDoesNotExist_ShouldReturnId()
         {
             // Arrange
-            var student = new Students.CreateStudentRequest
+            var student = new CreateStudent.Request
             {
                 FirstMidName = "Joe",
                 LastName = "Soap",

@@ -9,9 +9,9 @@ namespace ContosoUniversity.Controllers
     public class StudentsController
     {
         [HttpPost]
-        public async Task<ActionResult<Students.CreateStudentResponse>> Create(Students.CreateStudentRequest student)
+        public async Task<ActionResult<CreateStudent.Response>> Create(CreateStudent.Request student)
         {
-            return new Students.CreateStudentResponse(1);
+            return new CreateStudent.Response(1);
         }
     }
 }

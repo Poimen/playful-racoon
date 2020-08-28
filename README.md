@@ -11,6 +11,7 @@ This is a different take on the Contoso University tutorial bt Microsoft found [
  - Vertical Slice Architecture
  - Dapper
  - Fluent migration
+ - NSwag API explorer
 
  ## Migration of the database
  TODO

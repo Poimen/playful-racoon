@@ -12,7 +12,7 @@ using MediatR;
 
 namespace ContosoUniversity.CommandHandlers
 {
-    public class CreateStudentHandler : IRequestHandler<CreateStudent.Request, int>
+    public class CreateStudentHandler : IRequestHandler<CreateStudent.Request, long>
     {
         private readonly IDbFactory _dbFactory;
         private readonly IMapper _mapper;
@@ -25,15 +25,14 @@ namespace ContosoUniversity.CommandHandlers
             _transactionProvider = transactionProvider;
         }
 
-        public async Task<int> Handle(CreateStudent.Request request, CancellationToken cancellationToken)
+        public async Task<long> Handle(CreateStudent.Request request, CancellationToken cancellationToken)
         {
             // TODO : business rules
 
             var model = _mapper.Map<StudentDto>(request);
-            await _dbFactory.NewDb().InsertAsync(model);
+            var id = await _dbFactory.NewDb().InsertAsync(model);
 
-            // return Task.FromResult(1);
-            return 1;
+            return id;
         }
     }
 }

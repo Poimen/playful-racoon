@@ -6,7 +6,7 @@ namespace ContosoUniversity.Models.Students
 {
     public class CreateStudent
     {
-        public class Request : IRequest<int>
+        public class Request : IRequest<long>
         {
             public string LastName { get; set; }
 
@@ -27,9 +27,9 @@ namespace ContosoUniversity.Models.Students
 
         public class Response
         {
-            public int Id { get; }
+            public long Id { get; }
 
-            public Response(int id)
+            public Response(long id)
             {
                 Id = id;
             }

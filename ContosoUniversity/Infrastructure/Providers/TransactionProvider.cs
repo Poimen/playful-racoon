@@ -19,35 +19,37 @@ namespace ContosoUniversity.Infrastructure.Providers
         {
             async Task Execute()
             {
-                Begin();
+                await BeginAsync();
                 await action();
-                await Commit();
+                await CommitAsync();
             }
 
-            await Catcher.RethrowAsync(Execute, Rollback, Close);
+            await Catcher.RethrowAsync(Execute, RollbackAsync, CloseAsync);
         }
 
-        private void Begin()
+        private Task BeginAsync()
         {
             _dbConnection = _connectionProvider.Connection;
             _dbConnection.Open();
 
             _transaction = _dbConnection.BeginTransaction();
+
+            return Task.CompletedTask;
         }
 
-        private Task Commit()
+        private Task CommitAsync()
         {
             _transaction.Commit();
             return Task.CompletedTask;
         }
 
-        private Task Rollback()
+        private Task RollbackAsync()
         {
             _transaction.Rollback();
             return Task.CompletedTask;
         }
 
-        private Task Close()
+        private Task CloseAsync()
         {
             _dbConnection.Close();
             _dbConnection.Dispose();

@@ -1,19 +1,19 @@
 using System;
 using System.Data;
-using Microsoft.Extensions.Configuration;
+using ContosoUniversity.settings;
 using MySql.Data.MySqlClient;
 
-namespace ContosoUniversity.Infrastructure
+namespace ContosoUniversity.Infrastructure.Factories
 {
     public class ConnectionFactory : IConnectionFactory
     {
         private readonly string _connectionString;
 
-        public ConnectionFactory(IConfiguration configuration)
+        public ConnectionFactory(DatabaseSettings settings)
         {
-            if (configuration == null) throw new ArgumentNullException(nameof(configuration));
+            if (settings == null) throw new ArgumentNullException(nameof(settings));
 
-            _connectionString = configuration.GetConnectionString("DefaultConnection");
+            _connectionString = settings.ConnectionString;
         }
 
         public IDbConnection CreateMySqlConnection()

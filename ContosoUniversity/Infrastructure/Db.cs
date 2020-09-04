@@ -1,22 +1,23 @@
 using System;
-using System.Data;
+using System.Threading.Tasks;
+using ContosoUniversity.Infrastructure.Providers;
 using Dapper.Contrib.Extensions;
 
 namespace ContosoUniversity.Infrastructure
 {
     public class Db
     {
-        private readonly IConnectionFactory _connection;
+        private readonly IConnectionProvider _connectionProvider;
 
-        public Db(IConnectionFactory connectionFactory)
+        public Db(IConnectionProvider connectionProvider)
         {
-            _connection = connectionFactory ?? throw new ArgumentNullException(nameof(connectionFactory));
+            _connectionProvider = connectionProvider ?? throw new ArgumentNullException(nameof(connectionProvider));
         }
 
-        public long Insert<T>(T model) where T : class, IDatabaseModel
+        public async Task<long> InsertAsync<T>(T model) where T : class, IDatabaseModel
         {
-            using var conn = _connection.CreateMySqlConnection();
-            return conn.Insert(model);
+            var connection = _connectionProvider.Connection;
+            return await connection.InsertAsync(model);
         }
     }
 }

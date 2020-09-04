@@ -1,5 +1,6 @@
 using AutoMapper;
-using ContosoUniversity.Infrastructure;
+using ContosoUniversity.Extensions;
+using ContosoUniversity.Pipeline;
 using FluentValidation.AspNetCore;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
@@ -28,10 +29,8 @@ namespace ContosoUniversity
             services.AddControllers()
                 .AddFluentValidation(cfg => cfg.RegisterValidatorsFromAssemblyContaining<Startup>());
 
-            services.AddScoped<IDbFactory, DbFactory>();
-            services.AddScoped<IConnectionFactory, ConnectionFactory>();
-
             services.AddAutoMapper(typeof(Startup));
+            services.AddScopeDatabase();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -47,6 +46,7 @@ namespace ContosoUniversity
             app.UseCors();
 
             app.UseAuthorization();
+            app.UseMiddleware<TransactionMiddleware>();
 
             app.UseEndpoints(endpoints =>
             {

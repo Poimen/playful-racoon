@@ -1,6 +1,6 @@
 using System.Data;
 
-namespace ContosoUniversity.Infrastructure
+namespace ContosoUniversity.Infrastructure.Factories
 {
     public interface IConnectionFactory
     {

@@ -4,7 +4,10 @@ using System.Threading.Tasks;
 using AutoMapper;
 using ContosoUniversity.CommandHandlers.Models;
 using ContosoUniversity.Infrastructure;
+using ContosoUniversity.Infrastructure.Factories;
+using ContosoUniversity.Infrastructure.Providers;
 using ContosoUniversity.Models.Students;
+using ContosoUniversity.settings;
 using MediatR;
 
 namespace ContosoUniversity.CommandHandlers
@@ -13,21 +16,24 @@ namespace ContosoUniversity.CommandHandlers
     {
         private readonly IDbFactory _dbFactory;
         private readonly IMapper _mapper;
+        private readonly ITransactionProvider _transactionProvider;
 
-        public CreateStudentHandler(IDbFactory dbFactory, IMapper mapper)
+        public CreateStudentHandler(IDbFactory dbFactory, IMapper mapper, ITransactionProvider transactionProvider)
         {
             _dbFactory = dbFactory ?? throw new ArgumentNullException(nameof(dbFactory));
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
+            _transactionProvider = transactionProvider;
         }
 
-        public Task<int> Handle(CreateStudent.Request request, CancellationToken cancellationToken)
+        public async Task<int> Handle(CreateStudent.Request request, CancellationToken cancellationToken)
         {
             // TODO : business rules
 
             var model = _mapper.Map<StudentDto>(request);
-            _dbFactory.NewDb().Insert(model);
+            await _dbFactory.NewDb().InsertAsync(model);
 
-            return Task.FromResult(1);
+            // return Task.FromResult(1);
+            return 1;
         }
     }
 }

@@ -9,9 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ContosoUniversity.Test", "C
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ContosoUniversity.Migrator", "ContosoUniversity.Migrator\ContosoUniversity.Migrator.csproj", "{80E38DF3-5A5D-4B61-843A-606453667B6C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FWK.Infrastructure.Hosting", "FWK.Infrastructure.Hosting\FWK.Infrastructure.Hosting.csproj", "{02890DEE-0FF3-4739-8E7C-DD1BFA5A0FAF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fwk.Infrastructure.Hosting", "FWK.Infrastructure.Hosting\Fwk.Infrastructure.Hosting.csproj", "{02890DEE-0FF3-4739-8E7C-DD1BFA5A0FAF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FWK.Infrastructure.Host.WebAPI", "FWK.Infrastructure.Host.WebAPI\FWK.Infrastructure.Host.WebAPI.csproj", "{AC0EEBA6-B7B4-4C37-916E-1E4F128364D3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fwk.Infrastructure.Host.WebAPI", "FWK.Infrastructure.Host.WebAPI\Fwk.Infrastructure.Host.WebAPI.csproj", "{AC0EEBA6-B7B4-4C37-916E-1E4F128364D3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContosoUniversity.Platform.Api", "ContosoUniversity.Platform.Api\ContosoUniversity.Platform.Api.csproj", "{D5D791BC-D50B-4DB2-A612-1055A446A19E}"
 EndProject

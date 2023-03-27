@@ -2,7 +2,6 @@ using ContosoUniversity.Infrastructure.Factories;
 using ContosoUniversity.Infrastructure.Providers;
 using ContosoUniversity.Pipeline;
 using ContosoUniversity.settings;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace ContosoUniversity.Extensions
 {

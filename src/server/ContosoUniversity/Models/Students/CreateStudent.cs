@@ -1,6 +1,6 @@
 using System;
 using FluentValidation;
-using MediatR;
+using Mediator;
 
 namespace ContosoUniversity.Models.Students
 {
@@ -15,15 +15,15 @@ namespace ContosoUniversity.Models.Students
             public DateTime EnrollmentDate { get; set; }
         }
 
-        public class Validator : AbstractValidator<Request>
-        {
-            public Validator()
-            {
-                RuleFor(m => m.LastName).NotNull().Length(1, 50);
-                RuleFor(m => m.FirstMidName).NotNull().Length(1, 50);
-                RuleFor(m => m.EnrollmentDate).NotNull();
-            }
-        }
+        //public class Validator : AbstractValidator<Request>
+        //{
+        //    public Validator()
+        //    {
+        //        RuleFor(m => m.LastName).NotNull().Length(1, 50);
+        //        RuleFor(m => m.FirstMidName).NotNull().Length(1, 50);
+        //        RuleFor(m => m.EnrollmentDate).NotNull();
+        //    }
+        //}
 
         public class Response
         {

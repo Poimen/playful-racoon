@@ -1,14 +1,9 @@
-using System;
-using System.Threading;
-using System.Threading.Tasks;
 using AutoMapper;
 using ContosoUniversity.CommandHandlers.Models;
-using ContosoUniversity.Infrastructure;
 using ContosoUniversity.Infrastructure.Factories;
 using ContosoUniversity.Infrastructure.Providers;
 using ContosoUniversity.Models.Students;
-using ContosoUniversity.settings;
-using MediatR;
+using Mediator;
 
 namespace ContosoUniversity.CommandHandlers
 {
@@ -25,7 +20,7 @@ namespace ContosoUniversity.CommandHandlers
             _transactionProvider = transactionProvider;
         }
 
-        public async Task<long> Handle(CreateStudent.Request request, CancellationToken cancellationToken)
+        public async ValueTask<long> Handle(CreateStudent.Request request, CancellationToken cancellationToken)
         {
             // TODO : business rules
 

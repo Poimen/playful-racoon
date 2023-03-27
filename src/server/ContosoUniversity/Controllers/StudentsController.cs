@@ -1,7 +1,5 @@
-using System;
-using System.Threading.Tasks;
 using ContosoUniversity.Models.Students;
-using MediatR;
+using Mediator;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ContosoUniversity.Controllers
@@ -18,9 +16,9 @@ namespace ContosoUniversity.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<CreateStudent.Response>> Create(CreateStudent.Request student)
+        public async ValueTask<ActionResult<CreateStudent.Response>> Create(CreateStudent.Request student, CancellationToken cancellationToken)
         {
-            var createdId = await _mediator.Send(student);
+            var createdId = await _mediator.Send(student, cancellationToken);
             return new CreateStudent.Response(createdId);
         }
     }

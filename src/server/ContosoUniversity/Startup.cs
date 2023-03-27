@@ -1,13 +1,5 @@
-using AutoMapper;
 using ContosoUniversity.Extensions;
-using ContosoUniversity.Pipeline;
 using FluentValidation.AspNetCore;
-using MediatR;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 
 namespace ContosoUniversity
 {
@@ -25,12 +17,15 @@ namespace ContosoUniversity
             services.AddHealthChecks();
             services.AddOpenApiDocument();
             services.AddLogging();
-            services.AddMediatR(typeof(Startup));
             services.AddControllers()
                 .AddFluentValidation(cfg => cfg.RegisterValidatorsFromAssemblyContaining<Startup>());
 
             services.AddAutoMapper(typeof(Startup));
             services.AddScopeDatabase();
+            services.AddMediator(opts =>
+            {
+                opts.ServiceLifetime = ServiceLifetime.Scoped;
+            });
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -46,7 +41,7 @@ namespace ContosoUniversity
             app.UseCors();
 
             app.UseAuthorization();
-            app.UseMiddleware<TransactionMiddleware>();
+            //app.UseMiddleware<TransactionMiddleware>();
 
             app.UseEndpoints(endpoints =>
             {

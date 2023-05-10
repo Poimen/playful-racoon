@@ -1,6 +1,14 @@
-﻿namespace ContosoUniversity.Platform.Student.Queries
+﻿using ContosoUniversity.Platform.Api.Students.Queries;
+using Fwk.Kernel.Core.Queries;
+using Fwk.Kernel.Core.Results;
+
+namespace ContosoUniversity.Platform.Student.Queries
 {
-    public class GetAllStudentsQueryHandler
+    public class GetAllStudentsQueryHandler : IHandleQuery<GetAllStudentsQuery, GetAllStudentsQueryResult>
     {
+        public ValueTask<ApplicationResult<GetAllStudentsQueryResult>> Handle(GetAllStudentsQuery query)
+        {
+            return ApplicationResult<GetAllStudentsQueryResult>.Success(new GetAllStudentsQueryResult());
+        }
     }
 }

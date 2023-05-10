@@ -7,4 +7,8 @@
     public interface ICommandResult : IActionResult
     {
     }
+
+    public interface IQueryResult : IActionResult
+    {
+    }
 }

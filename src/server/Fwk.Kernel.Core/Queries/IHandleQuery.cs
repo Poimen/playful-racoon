@@ -1,7 +1,11 @@
-﻿namespace Fwk.Kernel.Core.Queries
+﻿using Fwk.Kernel.Core.Results;
+
+namespace Fwk.Kernel.Core.Queries
 {
-    public interface IHandleQuery<T> where T : IQuery
+    public interface IHandleQuery<TQuery, TResult>
+        where TQuery : IQuery
+        where TResult : IActionResult
     {
-        void Handle(T query);
+        ValueTask<ApplicationResult<TResult>> Handle(TQuery query);
     }
 }

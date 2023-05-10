@@ -43,5 +43,10 @@ namespace Fwk.Kernel.Core.Results
 
             return ValueTask.FromResult(result);
         }
+
+        public static ValueTask<ApplicationResult<T>> Success<T>(T value) where T : IActionResult
+        {
+            return ApplicationResult<T>.Success(value);
+        }
     }
 }

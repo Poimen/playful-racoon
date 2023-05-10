@@ -1,5 +1,4 @@
 ﻿using ContosoUniversity.Platform.Api.Students.Commands;
-using ContosoUniversity.Platform.Api.Students.Commands.Results;
 using Fwk.Kernel.Core.Commands;
 using Fwk.Kernel.Core.Results;
 

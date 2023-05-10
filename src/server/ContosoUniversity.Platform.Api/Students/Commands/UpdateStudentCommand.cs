@@ -1,4 +1,5 @@
 ﻿using Fwk.Kernel.Core.Commands;
+using Fwk.Kernel.Core.Results;
 
 namespace ContosoUniversity.Platform.Api.Students.Commands
 {
@@ -16,5 +17,9 @@ namespace ContosoUniversity.Platform.Api.Students.Commands
             LastName = lastName;
             EnrollmentDate = enrollmentDate;
         }
+    }
+
+    public class UpdatedStudentResult : ICommandResult
+    {
     }
 }

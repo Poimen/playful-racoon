@@ -1,4 +1,4 @@
-﻿namespace Fwk.Kernel.Core
+﻿namespace Fwk.Kernel.Core.Results
 {
     public class ApplicationMessages : IApplicationMessages
     {
@@ -6,22 +6,24 @@
 
         public bool WasSuccessful => _errorMessages.Count == 0;
 
+        public IEnumerable<string> Messages => _errorMessages;
+
         private ApplicationMessages()
         {
             _errorMessages = new List<string>();
         }
 
-        public static ApplicationMessages Empty()
+        public static IApplicationMessages Empty()
         {
             return new ApplicationMessages();
         }
 
-        public void Aggregate(ApplicationMessages messages)
+        public void Aggregate(IApplicationMessages messages)
         {
-            _errorMessages.AddRange(messages._errorMessages);
+            _errorMessages.AddRange(messages.Messages);
         }
 
-        public void AddError(string message)
+        public void Add(string message)
         {
             _errorMessages.Add(message);
         }

@@ -1,14 +1,17 @@
-﻿namespace Fwk.Kernel.Core.Commands
+﻿using Fwk.Kernel.Core.Results;
+
+namespace Fwk.Kernel.Core.Commands
 {
-    public interface IHandleCommand<T> where T : ICommand
+    public interface IHandleCommand<TCommand, TResult>
+        where TCommand : ICommand
+        where TResult : IActionResult
     {
-        ICommandResult Handle(T command);
+        ValueTask<ApplicationResult<TResult>> Handle(TCommand command);
     }
 
-    public interface IHandleCommand<T, TCommandResult>
-        where T : ICommand
-        where TCommandResult : new()
+    public interface IHandleCommand<TCommand>
+        where TCommand : ICommand
     {
-        ICommandResult<TCommandResult> Handle(T command);
+        ValueTask<ApplicationResult> Handle(TCommand command);
     }
 }

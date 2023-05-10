@@ -8,7 +8,7 @@ namespace ContosoUniversity.Platform.Student.Queries
     {
         public ValueTask<ApplicationResult<GetAllStudentsQueryResult>> Handle(GetAllStudentsQuery query)
         {
-            return ApplicationResult<GetAllStudentsQueryResult>.Success(new GetAllStudentsQueryResult());
+            return ApplicationResult.Success(new GetAllStudentsQueryResult());
         }
     }
 }

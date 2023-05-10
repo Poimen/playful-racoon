@@ -1,4 +1,4 @@
-﻿namespace Fwk.Kernel.Core.Results
+﻿namespace Fwk.Kernel.Core.Results.Messages
 {
     public interface IApplicationMessages
     {

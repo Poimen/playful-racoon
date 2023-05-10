@@ -1,4 +1,4 @@
-﻿namespace Fwk.Kernel.Core.Results
+﻿namespace Fwk.Kernel.Core.Results.Messages
 {
     public class ApplicationMessages : IApplicationMessages
     {
@@ -11,6 +11,11 @@
         private ApplicationMessages()
         {
             _errorMessages = new List<string>();
+        }
+
+        public ApplicationMessages(IApplicationMessages messages) : this()
+        {
+            Aggregate(messages);
         }
 
         public static IApplicationMessages Empty()

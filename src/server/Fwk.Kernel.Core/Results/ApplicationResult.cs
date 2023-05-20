@@ -1,52 +1,73 @@
 ﻿using Fwk.Kernel.Core.Optional;
+using Fwk.Kernel.Core.Results.Messages;
 
 namespace Fwk.Kernel.Core.Results
 {
-    public class ApplicationResult<T>
+    public class ApplicationResult<T> : IApplicationResult
         where T : IActionResult
     {
         public Optional<T> Result { get; protected set; }
 
-        public IApplicationMessages Messages => throw new NotImplementedException();
+        public IApplicationMessages Messages { get; protected set; }
 
         private ApplicationResult(T result)
         {
             Result = Optional<T>.Some(result);
+            Messages = ApplicationMessages.Empty();
         }
 
-        protected ApplicationResult()
+        private ApplicationResult(IApplicationMessages messages)
         {
             Result = Optional<T>.None();
+            Messages = new ApplicationMessages(messages);
         }
 
-        public static ValueTask<ApplicationResult<T>> Success(T result)
+        public static ApplicationResult<T> Success(T result)
         {
-            return ValueTask.FromResult(new ApplicationResult<T>(result));
+            return new ApplicationResult<T>(result);
         }
 
-        public static ValueTask<ApplicationResult<T>> Success()
+        public static ApplicationResult<T> Failed(IApplicationMessages messages)
         {
-            return ValueTask.FromResult(new ApplicationResult<T>());
+            return new ApplicationResult<T>(messages);
         }
     }
 
     public class VoidApplicationResult : IActionResult { }
 
-    public class ApplicationResult : ApplicationResult<VoidApplicationResult>, IActionResult
+    public class ApplicationResult : IApplicationResult
     {
-        public static new ValueTask<ApplicationResult> Success()
-        {
-            var result = new ApplicationResult
-            {
-                Result = Optional<VoidApplicationResult>.Some(new VoidApplicationResult())
-            };
+        private readonly ApplicationResult<VoidApplicationResult> _innerResult;
+        public IApplicationMessages Messages => _innerResult.Messages;
 
-            return ValueTask.FromResult(result);
+        private ApplicationResult()
+        {
+            _innerResult = ApplicationResult<VoidApplicationResult>.Success(new VoidApplicationResult());
+        }
+
+        private ApplicationResult(IApplicationMessages messages)
+        {
+            _innerResult = ApplicationResult<VoidApplicationResult>.Failed(messages);
+        }
+
+        public static ValueTask<ApplicationResult> Success()
+        {
+            return ValueTask.FromResult(new ApplicationResult());
         }
 
         public static ValueTask<ApplicationResult<T>> Success<T>(T value) where T : IActionResult
         {
-            return ApplicationResult<T>.Success(value);
+            return ValueTask.FromResult(ApplicationResult<T>.Success(value));
+        }
+
+        public static ValueTask<ApplicationResult> Failed(IApplicationMessages messages)
+        {
+            return ValueTask.FromResult(new ApplicationResult(messages));
+        }
+
+        public static ValueTask<ApplicationResult<T>> Failed<T>(IApplicationMessages messages) where T : IActionResult
+        {
+            return ValueTask.FromResult(ApplicationResult<T>.Failed(messages));
         }
     }
 }

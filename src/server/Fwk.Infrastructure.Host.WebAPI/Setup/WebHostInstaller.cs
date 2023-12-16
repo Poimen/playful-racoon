@@ -33,6 +33,8 @@ namespace Fwk.Infrastructure.Host.WebAPI.Setup
                 opts.AddConsole();
             });
             builder.Services.AddControllers();
+            builder.Services.AddHttpContextAccessor();
+            builder.Services.AddHealthChecks(); // TODO: Make health checks available
 
             return builder;
         }

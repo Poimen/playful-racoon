@@ -4,7 +4,7 @@ namespace Fwk.Infrastructure.Host.WebAPI.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class QueryController
+    public class PerformQueryHandlerController
     {
         [HttpPost]
         [HttpGet]
